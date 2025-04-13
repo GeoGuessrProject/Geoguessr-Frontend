@@ -1,0 +1,69 @@
+<script>
+  import { onMount } from "svelte";
+
+  let username = "";
+  let password = "";
+  let email = "";
+  let country = "";
+  let age = "";
+
+  let errorMessage = "";
+</script>
+
+<main class="flex flex-col items-center space-y-6 p-4">
+  <h1 class="text-2xl font-bold">Register on GeoGussr</h1>
+  <p class="text-gray-600">Please fill out the form to create an account.</p>
+
+  <form class="flex flex-col space-y-4">
+    <input
+      type="text"
+      placeholder="Username"
+      bind:value={username}
+      class="border border-gray-300 rounded px-4 py-2"
+    />
+    
+    <input
+      type="password"
+      placeholder="Password"
+      bind:value={password}
+      class="border border-gray-300 rounded px-4 py-2"
+    />
+
+    <input
+      type="email"
+      placeholder="Email"
+      bind:value={email}
+      class="border border-gray-300 rounded px-4 py-2"
+    />
+
+    <input
+      type="text"
+      placeholder="Country"
+      bind:value={country}
+      class="border border-gray-300 rounded px-4 py-2"
+    />
+
+    <input
+      type="number"
+      placeholder="Age"
+      bind:value={age}
+      class="border border-gray-300 rounded px-4 py-2"
+    />
+
+    <button
+      type="submit"
+      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+    >
+      Register
+    </button>
+
+    {#if errorMessage}
+      <p class="text-red-500">{errorMessage}</p>
+    {/if}
+  </form>
+  
+  <p class="text-sm">
+    Already have an account? <a href="/login" class="text-blue-500">Login</a>
+  </p>
+
+</main>
