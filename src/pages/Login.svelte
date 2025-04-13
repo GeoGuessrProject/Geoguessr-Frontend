@@ -1,8 +1,35 @@
 <script>
-  import { onMount } from "svelte";
+  import { user } from "../stores/user";
 
-  let username = "";
-  let password = "";
+  let username = "victor";
+  let password = "1234";
+
+  async function handleLogin(event) {
+    event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8001/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("username", data.username);
+      user.set({ name: username, isAuthenticated: true });
+
+      alert(`Login successful! Welcome, ${data.username}`);
+      window.location.href = "/";
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 </script>
 
 <main class="flex flex-col items-center space-y-6 p-4">
@@ -25,6 +52,7 @@
     <button
       type="submit"
       class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      on:click={handleLogin}
     >
       Login
     </button>

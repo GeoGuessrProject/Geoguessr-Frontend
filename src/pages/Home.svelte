@@ -1,68 +1,62 @@
 <script>
   import { onMount } from "svelte";
+  import { user } from "../stores/user";
 
-  let message = "Loading...";
-  let name = "";
+  $: name = $user.name;
 
-  async function fetchMessage(url) {
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      message = data.message || "Error or no message received";
-    } catch (error) {
-      message = "Error connecting to backend.";
+  const services = [
+    { name: "Auth Service", url: "http://localhost:8001" },
+    { name: "Game Service", url: "http://localhost:8002" },
+    { name: "Map/Image Service", url: "http://localhost:8003" },
+    { name: "Score Service", url: "http://localhost:8004" },
+    { name: "Email Notification Service", url: "http://localhost:8005" },
+  ];
+
+  let statuses = {};
+
+  async function checkServices() {
+    const results = {};
+    for (const service of services) {
+      try {
+        const res = await fetch(service.url);
+        const data = await res.json();
+        results[service.name] = data.message;
+      } catch (err) {
+        results[service.name] = "Error connecting";
+      }
     }
+    statuses = results;
   }
 
   onMount(() => {
-    fetchMessage("http://localhost:8001/");
+    checkServices();
   });
 </script>
 
-<main class="flex flex-col items-center space-y-4">
-  <h1 class="text-2xl font-bold">Hello {name || "GeoGuessr Player"}!</h1>
-  <input
-    class="border border-gray-300 rounded px-4 py-2"
-    placeholder="Enter name"
-    bind:value={name}
-  />
+<main class="flex flex-col items-center space-y-6">
+  <h1 class="text-2xl font-bold mt-2">Hello {name || "GeoGuessr Player"}!</h1>
 
-  <p class="text-lg font-bold mt-20">Connection status on each microservice:</p>
-  <p class="text-sm">{message}</p>
+  <h2 class="text-lg font-bold mt-5">Microservice Status:</h2>
 
-  <div class="grid grid-cols-2 gap-4">
-    <button
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      on:click={() => fetchMessage("http://localhost:8001/")}
-    >
-      Fetch from :8001
-    </button>
-    <button
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      on:click={() => fetchMessage("http://localhost:8002/")}
-    >
-      Fetch from :8002
-    </button>
-    <button
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      on:click={() => fetchMessage("http://localhost:8003/")}
-    >
-      Fetch from :8003
-    </button>
-    <button
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      on:click={() => fetchMessage("http://localhost:8004/")}
-    >
-      Fetch from :8004
-    </button>
-    <button
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      on:click={() => fetchMessage("http://localhost:8005/")}
-    >
-      Fetch from :8005
-    </button>
+  <div class="w-full max-w-sm bg-gray-100 rounded-lg p-4 shadow-md">
+    {#each Object.entries(statuses) as [service, status]}
+      <div class="flex justify-between items-center py-4 border-b last:border-b-0">
+        <span class="font-medium">{service}</span>
+        <span class="{status.includes('Connected') ? 'text-green-600' : 'text-red-600'} font-semibold">
+          {status}
+        </span>
+      </div>
+    {/each}
   </div>
+
+  <button
+    on:click={checkServices}
+    class="mt-1 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+  >
+    Refresh Status
+  </button>
 </main>
+
 
 <style>
   main {

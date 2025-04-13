@@ -4,10 +4,38 @@
   let username = "";
   let password = "";
   let email = "";
-  let country = "";
+  let country = "Denmark";
   let age = "";
 
   let errorMessage = "";
+
+  async function registerUser() {
+    try {
+      const response = await fetch("http://localhost:8001/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email,
+          country,
+          age,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration failed");
+      }
+
+      const data = await response.json();
+      window.location.href = "/login";
+      alert(`Registration successful! Welcome, ${data.username}`);
+    } catch (error) {
+      errorMessage = error.message;
+    }
+  }
 </script>
 
 <main class="flex flex-col items-center space-y-6 p-4">
@@ -21,7 +49,7 @@
       bind:value={username}
       class="border border-gray-300 rounded px-4 py-2"
     />
-    
+
     <input
       type="password"
       placeholder="Password"
@@ -53,6 +81,7 @@
     <button
       type="submit"
       class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      on:click|preventDefault={registerUser}
     >
       Register
     </button>
@@ -61,9 +90,8 @@
       <p class="text-red-500">{errorMessage}</p>
     {/if}
   </form>
-  
+
   <p class="text-sm">
     Already have an account? <a href="/login" class="text-blue-500">Login</a>
   </p>
-
 </main>
