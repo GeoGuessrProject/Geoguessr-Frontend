@@ -5,6 +5,7 @@
   import Login from "./pages/Login.svelte";
   import Register from "./pages/Register.svelte";
   import Profile from "./pages/Profile.svelte";
+  import Game from "./pages/Game.svelte";
 
   import Navbar from "./components/Navbar.svelte";
 
@@ -28,6 +29,10 @@
     {
       path: "profile",
       component: Profile,
+    },
+    {
+      path: "game",
+      component: Game,
     }
   ];
 </script>

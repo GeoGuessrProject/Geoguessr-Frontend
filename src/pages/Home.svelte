@@ -36,6 +36,10 @@
 <main class="flex flex-col items-center space-y-6">
   <h1 class="text-2xl font-bold mt-2">Hello {name || "GeoGuessr Player"}!</h1>
 
+  <a href="/game" class="w-50 bg-blue-600 text-white px-4 py-2 rounded mb-4">
+    Go to game
+  </a>
+
   <h2 class="text-lg font-bold mt-5">Microservice Status:</h2>
 
   <div class="w-full max-w-sm bg-gray-100 rounded-lg p-4 shadow-md">

@@ -29,6 +29,7 @@
             <a href="/" class="text-white font-bold hover:text-cyan-400 transition-colors">Home</a>
             <a href="/leaderboard" class="text-white font-bold hover:text-cyan-400 transition-colors">Leaderboard</a>
             {#if isAuthenticated}
+            <a href="/game" class="text-white font-bold hover:text-cyan-400 transition-colors">Game</a>
             <a href="/profile" class="text-white font-bold hover:text-cyan-400 transition-colors">Profile</a>
             {/if}
         </div>
