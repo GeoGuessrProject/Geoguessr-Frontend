@@ -23,8 +23,6 @@
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("username", data.username);
       user.set({ name: username, isAuthenticated: true });
-
-      alert(`Login successful! Welcome, ${data.username}`);
       window.location.href = "/";
     } catch (error) {
       alert(error.message);

@@ -4,6 +4,7 @@
   import Leaderboard from "./pages/LeaderboardPage.svelte";
   import Login from "./pages/Login.svelte";
   import Register from "./pages/Register.svelte";
+  import Profile from "./pages/Profile.svelte";
 
   import Navbar from "./components/Navbar.svelte";
 
@@ -23,6 +24,10 @@
     {
       path: "register",
       component: Register,
+    },
+    {
+      path: "profile",
+      component: Profile,
     }
   ];
 </script>
