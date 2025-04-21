@@ -1,8 +1,8 @@
 <script>
   import { user } from "../stores/user";
 
-  let username = "victor";
-  let password = "1234";
+  let username = "";
+  let password = "";
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -15,17 +15,31 @@
         body: JSON.stringify({ username, password }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Login failed");
+        throw new Error(data.detail || "Login failed");
       }
 
-      const data = await response.json();
+      if (!data.access_token || !data.username) {
+        throw new Error("Invalid login response");
+      }
+
+      // Store user data in localStorage
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("username", data.username);
-      user.set({ name: username, isAuthenticated: true });
+
+      user.set({
+        name: data.username,
+        email: data.email,
+        country: data.country,
+        age: data.age,
+        isAuthenticated: true,
+      });
+
       window.location.href = "/";
     } catch (error) {
-      alert(error.message);
+      alert(error.message || "An error occurred during login.");
     }
   }
 </script>

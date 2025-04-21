@@ -36,7 +36,7 @@
 <main class="flex flex-col items-center space-y-6">
   <h1 class="text-2xl font-bold mt-2">Hello {name || "GeoGuessr Player"}!</h1>
 
-  <a href="/game" class="w-50 bg-blue-600 text-white px-4 py-2 rounded mb-4">
+  <a href="/game" class="w-50 text-center bg-blue-600 text-white px-4 py-2 rounded mb-4">
     Go to game
   </a>
 
@@ -52,19 +52,4 @@
       </div>
     {/each}
   </div>
-
-  <button
-    on:click={checkServices}
-    class="mt-1 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-  >
-    Refresh Status
-  </button>
 </main>
-
-
-<style>
-  main {
-    text-align: center;
-    padding: 2rem;
-  }
-</style>

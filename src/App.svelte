@@ -9,6 +9,9 @@
 
   import Navbar from "./components/Navbar.svelte";
 
+  // Check if the user is authenticated
+  const isAuthenticated = !!localStorage.getItem("token");
+
   const routes = [
     {
       path: "/",
@@ -28,12 +31,12 @@
     },
     {
       path: "profile",
-      component: Profile,
+      component: isAuthenticated ? Profile : Login,
     },
     {
       path: "game",
-      component: Game,
-    }
+      component: isAuthenticated ? Game : Login,
+    },
   ];
 </script>
 

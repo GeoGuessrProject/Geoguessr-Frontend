@@ -4,6 +4,9 @@
 
     $: isAuthenticated = $user.isAuthenticated;
     $: name = $user.name;
+    $: email = $user.email;
+    $: age = $user.age;
+    $: country = $user.country;
 
     onMount(() => {
         const token = localStorage.getItem("token");
@@ -12,20 +15,20 @@
             isAuthenticated = true;
             name = username;
         }
-        user.set({ name, isAuthenticated });
+        user.set({ name, email, age, country, isAuthenticated });
     });
 
     function handleLogout() {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
         isAuthenticated = false;
-        user.set({ name: '', isAuthenticated: false });
-        window.location.href = "/";
+        user.set({ name: '', email: '', age: null, country: '', isAuthenticated });
+        window.location.href = "/login";
     }
 </script>
 
 <nav class="flex justify-between items-center bg-gray-800 text-white p-4 shadow-md">
-        <div class="flex gap-4">
+        <div class="flex gap-5">
             <a href="/" class="text-white font-bold hover:text-cyan-400 transition-colors">Home</a>
             <a href="/leaderboard" class="text-white font-bold hover:text-cyan-400 transition-colors">Leaderboard</a>
             {#if isAuthenticated}
