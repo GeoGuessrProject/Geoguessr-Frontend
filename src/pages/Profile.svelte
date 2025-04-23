@@ -80,7 +80,7 @@
                 <h2 class="text-xl font-semibold border-b pb-2">Game Stats</h2>
                 <p><strong>Games Played:</strong> {profile.games_played}</p>
                 <p><strong>Total Score:</strong> {profile.total_score}</p>
-                <p><strong>Average Score:</strong> {profile.average_score.toFixed(2)}</p>
+                <p><strong>Average Score:</strong> {profile.average_score ? profile.average_score.toFixed(2) : "N/A"}</p>
                 {#if profile.history?.length}
                     <p>
                         <strong>Last Game Score:</strong>
