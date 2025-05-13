@@ -4,13 +4,13 @@
 
   $: name = $user.name;
 
-  const services = [
-    { name: "Auth Service", url: "http://localhost:8001" },
-    { name: "Game Service", url: "http://localhost:8002" },
-    { name: "Map/Image Service", url: "http://localhost:8003" },
-    { name: "Score Service", url: "http://localhost:8004" },
-    { name: "Email Notification Service", url: "http://localhost:8005" },
-  ];
+const services = [
+  { name: "Auth Service", url: "http://localhost:8001/health" },
+  { name: "Game Service", url: "http://localhost:8002/health" },
+  { name: "Map/Image Service", url: "http://localhost:8003/health" },
+  { name: "Score Service", url: "http://localhost:8004/health" },
+  { name: "Email Notification Service", url: "http://localhost:8005/health" },
+];
 
   let statuses = {};
 
@@ -20,7 +20,7 @@
       try {
         const res = await fetch(service.url);
         const data = await res.json();
-        results[service.name] = data.message;
+        results[service.name] = data.status === "ok" ? "Connected" : "Error";
       } catch (err) {
         results[service.name] = "Error connecting";
       }
