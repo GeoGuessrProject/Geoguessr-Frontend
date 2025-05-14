@@ -11,3 +11,11 @@ body {
   height: 100%;
   width: 50%;
 }
+
+#map {
+  background-color: lightblue;
+}
+
+#pano {
+  background-color: lightgray;
+}
