@@ -28,7 +28,6 @@
       // Store user data in localStorage
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("username", data.username);
-
       localStorage.setItem("user", JSON.stringify({
           name: data.username,
           email: data.email,
@@ -71,7 +70,9 @@
   </form>
 
   <p class="text-sm">
-    Don't have an account? <a href="/register" class="text-blue-500">Register</a
-    >
+    Don't have an account? 
+    <a href="/register" class="text-blue-500">
+      Register
+    </a>
   </p>
 </main>

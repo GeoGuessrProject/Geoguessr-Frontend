@@ -31,7 +31,7 @@
         {#if isAuthenticated}
             <span class="text-sm">Logged in as: 
                 <a href="/profile" class="text-cyan-400 hover:text-cyan-300 transition-colors font-bold">
-                    <p>{user.name} ({user.email})</p>
+                    {user.name}
                 </a>
             </span>
 
