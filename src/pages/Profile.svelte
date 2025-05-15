@@ -1,13 +1,17 @@
 <script>
     import { onMount } from "svelte";
-    import { user } from "../stores/user";
+    import { userStore } from "../stores/user";
+
+    $: user = $userStore.user;
+    $: isAuthenticated = $userStore.isAuthenticated;
+
 
     let profile = null;
     let errorMessage = "";
 
     async function fetchProfileStats() {
         try {
-            const response = await fetch(`http://localhost:8002/user/${$user.name}/profile`, {
+            const response = await fetch(`http://localhost:8002/user/${user.name}/profile`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -17,7 +21,6 @@
             if (!response.ok) {
                 throw new Error(`Error: ${response.status} ${response.statusText}`);
             }
-
             profile = await response.json();
         } catch (error) {
             errorMessage = "Failed to fetch profile information.";
@@ -26,10 +29,8 @@
     }
 
     onMount(() => {
-        if ($user.isAuthenticated) {
+        if (isAuthenticated) {
             fetchProfileStats();
-            console.log($user);
-
         } else {
             errorMessage = "You must be logged in to view your profile.";
         }
@@ -39,7 +40,7 @@
 <main class="p-6 max-w-5xl mx-auto">
     <h1 class="text-3xl font-bold mb-6 text-center">
         Profile -
-        <span class="text-gray-500">{$user.name}</span>
+        <span class="text-gray-500">{user.name}</span>
     </h1>
 
     {#if errorMessage}
@@ -49,10 +50,10 @@
             <!-- Left: User Details -->
             <div class="bg-white rounded-lg shadow p-6 space-y-4">
                 <h2 class="text-xl font-semibold border-b pb-2">User Details</h2>
-                <p><strong>Username:</strong> {$user.name}</p>
-                <p><strong>Email:</strong> {$user.email}</p>
-                <p><strong>Country:</strong> {$user.country}</p>
-                <p><strong>Age:</strong> {$user.age}</p>
+                <p><strong>Username:</strong> {user.name}</p>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Country:</strong> {user.country}</p>
+                <p><strong>Age:</strong> {user.age}</p>
                 <p>
                     <strong>Last Login:</strong>
                     {new Date(profile.last_login).toLocaleString(undefined, {

@@ -1,9 +1,29 @@
+// stores/user.js
 import { writable } from 'svelte/store';
 
-export const user = writable({
-    name: localStorage.getItem('username') || '',
-    email: localStorage.getItem('email') || '',
-    age: localStorage.getItem('age') || '',
-    country: localStorage.getItem('country') || '',
-    isAuthenticated: !!localStorage.getItem('token')
-});
+function createUserStore() {
+    const { subscribe, set } = writable({
+        user: null,
+        isAuthenticated: false
+    });
+
+    return {
+        subscribe,
+        load: () => {
+            const raw = localStorage.getItem("user");
+            const token = localStorage.getItem("token");
+
+            set({
+                user: raw ? JSON.parse(raw) : null,
+                isAuthenticated: !!token
+            });
+        },
+        logout: () => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            set({ user: null, isAuthenticated: false });
+        }
+    };
+}
+
+export const userStore = createUserStore();

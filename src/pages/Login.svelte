@@ -1,5 +1,5 @@
 <script>
-  import { user } from "../stores/user";
+  import { userStore } from "../stores/user";
 
   let username = "";
   let password = "";
@@ -29,13 +29,13 @@
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("username", data.username);
 
-      user.set({
-        name: data.username,
-        email: data.email,
-        country: data.country,
-        age: data.age,
-        isAuthenticated: true,
-      });
+      localStorage.setItem("user", JSON.stringify({
+          name: data.username,
+          email: data.email,
+          country: data.country,
+          age: data.age
+      }));
+      userStore.load();
 
       window.location.href = "/";
     } catch (error) {

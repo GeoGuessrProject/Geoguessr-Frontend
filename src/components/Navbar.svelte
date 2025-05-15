@@ -1,28 +1,19 @@
 <script>
     import { onMount } from "svelte";
-    import { user } from "../stores/user";
+    import { userStore } from "../stores/user";
 
-    $: isAuthenticated = $user.isAuthenticated;
-    $: name = $user.name;
-    $: email = $user.email;
-    $: age = $user.age;
-    $: country = $user.country;
+    let user;
+    let isAuthenticated;
+
+    $: user = $userStore.user;
+    $: isAuthenticated = $userStore.isAuthenticated;
 
     onMount(() => {
-        const token = localStorage.getItem("token");
-        const username = localStorage.getItem("username");
-        if (token && username) {
-            isAuthenticated = true;
-            name = username;
-        }
-        user.set({ name, email, age, country, isAuthenticated });
+        userStore.load();
     });
 
     function handleLogout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        isAuthenticated = false;
-        user.set({ name: '', email: '', age: null, country: '', isAuthenticated });
+        userStore.logout();
         window.location.href = "/login";
     }
 </script>
@@ -40,7 +31,7 @@
         {#if isAuthenticated}
             <span class="text-sm">Logged in as: 
                 <a href="/profile" class="text-cyan-400 hover:text-cyan-300 transition-colors font-bold">
-                    {name}
+                    <p>{user.name} ({user.email})</p>
                 </a>
             </span>
 
