@@ -2,15 +2,18 @@
   "name": "geoguessr-frontend",
   "version": "1.0.0",
   "type": "module",
+    "homepage": "https://victorhanert.github.io/geoguessr-frontend",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tailwindcss/vite": "^4.1.3",
     "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.3",
     "svelte": "^5.20.2",
     "tailwindcss": "^4.1.3",
