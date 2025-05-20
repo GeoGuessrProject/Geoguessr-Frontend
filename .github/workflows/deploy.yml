@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          
+
       - name: Set Git user for deployment
         run: |
           git config --global user.email "vict660m@stud.kea.dk"
@@ -30,9 +30,12 @@ jobs:
         run: |
           npm run build
 
+      - name: Set up GitHub Pages repository URL
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
       - name: Deploy to GitHub Pages
         run: |
           npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided by GitHub Actions
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure gh-pages can use the token for authentication
