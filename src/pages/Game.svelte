@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { GAME_URL } from "../config";
 
   let username = localStorage.getItem("username") || "Guest";
   let isAuthenticated = !!localStorage.getItem("token");
@@ -11,7 +11,7 @@
 
   async function startGame() {
     const res = await fetch(
-      `http://localhost:8002/user/${username}/start-game`,
+      `http://${GAME_URL}:8002/user/${username}/start-game`,
       {
         method: "POST",
       }
@@ -28,7 +28,7 @@
   }
 
   async function submitGuess() {
-    const res = await fetch(`http://localhost:8002/user/${username}/guess`, {
+    const res = await fetch(`http://${GAME_URL}:8002/user/${username}/guess`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ guess }),
@@ -47,7 +47,7 @@
   }
 
   async function endGame() {
-    const res = await fetch(`http://localhost:8002/user/${username}/end-game`, {
+    const res = await fetch(`http://${GAME_URL}:8002/user/${username}/end-game`, {
       method: "POST",
     });
 

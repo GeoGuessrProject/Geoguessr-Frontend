@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { SCORE_URL } from "../config";
 
   let leaderboard = [];
   let search = "";
@@ -7,7 +8,7 @@
   // Fetch top scores on component mount
   onMount(async () => {
     try {
-      const res = await fetch('http://localhost:8004/user/leaderboard');
+      const res = await fetch(`http://${SCORE_URL}:8004/user/leaderboard`);
       if (!res.ok) throw new Error('Failed to fetch leaderboard');
       const data = await res.json();
       leaderboard = data.top_scores.map(item => ({

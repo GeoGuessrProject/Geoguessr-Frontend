@@ -1,5 +1,6 @@
 <script>
   import { user } from "../stores/user";
+  import { AUTH_URL, GAME_URL, IMAGE_URL, SCORE_URL, NOTIFICATION_URL } from "../config";
 
   let username = "";
   let password = "";
@@ -7,7 +8,7 @@
   async function handleLogin(event) {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:8001/login", {
+      const response = await fetch(`http://${AUTH_URL}:8001/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
