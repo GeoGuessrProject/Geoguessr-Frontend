@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    import { user } from "../stores/user";
     import { AUTH_URL } from "../config";
     import { userStore } from "../stores/user";
 
