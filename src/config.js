@@ -1,22 +1,22 @@
 /// <reference types="vite/client" />
-const isDev = window.location.hostname === "localhostt";
+const isDev = window.location.hostname === "localhost";
 
 export const AUTH_URL = isDev
-    ? "localhost"
-    : import.meta.env.VITE_AUTH_PROD;
+  ? "http://localhost:8001"
+  : `https://${import.meta.env.VITE_AUTH_PROD}:8001`;
 
 export const GAME_URL = isDev
-    ? "localhost"
-    : import.meta.env.VITE_GAME_PROD;
+    ? "http://localhost:8002"
+    : `https://${import.meta.env.VITE_GAME_PROD}:8002`;
 
 export const IMAGE_URL = isDev
-  ? "localhost"
-  : "localhost";
+  ? "http://localhost:8003"
+  : "http://localhost:8003";
 
 export const SCORE_URL = isDev
-  ? "localhost"
-  : "localhost";
+  ? "http://localhost:8004"
+  : "http://localhost:8004";
 
 export const NOTIFICATION_URL = isDev
-  ? "localhost"
-  : "localhost";
+  ? "http://localhost:8005"
+  : "http://localhost:8005";

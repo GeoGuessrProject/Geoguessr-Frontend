@@ -6,11 +6,11 @@
   $: user = $userStore.user;
 
 const services = [
-  { name: "Auth Service", url: `http://${AUTH_URL}:8001/health` },
-  { name: "Game Service", url: `http://${GAME_URL}:8002/health` },
-  { name: "Map/Image Service", url: `http://${IMAGE_URL}:8003/health` },
-  { name: "Score Service", url: `http://${SCORE_URL}:8004/health` },
-  { name: "Email Notification Service", url: `http://${NOTIFICATION_URL}:8005/health` },
+  { name: "Auth Service", url: `${AUTH_URL}/health` },
+  { name: "Game Service", url: `${GAME_URL}/health` },
+  { name: "Map/Image Service", url: `${IMAGE_URL}/health` },
+  { name: "Score Service", url: `${SCORE_URL}/health` },
+  { name: "Email Notification Service", url: `${NOTIFICATION_URL}/health` },
 ];
 
   let statuses = {};
@@ -31,6 +31,7 @@ const services = [
 
   onMount(() => {
     checkServices();
+    console.log("AUTH URL", AUTH_URL);
   });
 </script>
 

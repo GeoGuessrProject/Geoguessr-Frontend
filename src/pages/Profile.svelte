@@ -11,7 +11,7 @@
 
     async function fetchProfileStats() {
         try {
-            const response = await fetch(`http://${AUTH_URL}:8002/user/${$user.name}/profile`, {
+            const response = await fetch(`${AUTH_URL}/user/${$user.name}/profile`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

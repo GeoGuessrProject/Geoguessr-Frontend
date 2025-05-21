@@ -8,7 +8,7 @@
   async function handleLogin(event) {
     event.preventDefault();
     try {
-      const response = await fetch(`http://${AUTH_URL}:8001/login`, {
+      const response = await fetch(`${AUTH_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
