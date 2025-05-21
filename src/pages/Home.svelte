@@ -34,7 +34,7 @@
 </script>
 
 <main class="flex flex-col items-center space-y-6">
-  <h1 class="text-2xl font-bold mt-2">Hello {user.name || "GeoGuessr Player"}!</h1>
+  <h1 class="text-2xl font-bold mt-2"> Hello {(user && user.name) ? user.name : "GeoGuessr Player"}!</h1>
 
   <a href="/game" class="w-50 text-center bg-blue-600 text-white px-4 py-2 rounded mb-4">
     Go to game
