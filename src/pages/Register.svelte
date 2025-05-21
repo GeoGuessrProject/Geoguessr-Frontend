@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { AUTH_URL } from "../config";
 
   let username = "";
   let password = "";
@@ -11,7 +11,7 @@
 
   async function registerUser() {
     try {
-      const response = await fetch("http://localhost:8001/register", {
+      const response = await fetch(`http://${AUTH_URL}:8001/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

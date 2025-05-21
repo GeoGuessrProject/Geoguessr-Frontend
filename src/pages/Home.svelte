@@ -1,16 +1,17 @@
 <script>
   import { onMount } from "svelte";
+  import { AUTH_URL, GAME_URL, IMAGE_URL, SCORE_URL, NOTIFICATION_URL } from "../config";
   import { userStore } from "../stores/user";
 
   $: user = $userStore.user;
 
-  const services = [
-    { name: "Auth Service", url: "http://localhost:8001" },
-    { name: "Game Service", url: "http://localhost:8002" },
-    { name: "Map/Image Service", url: "http://localhost:8003" },
-    { name: "Score Service", url: "http://localhost:8004" },
-    { name: "Email Notification Service", url: "http://localhost:8005" },
-  ];
+const services = [
+  { name: "Auth Service", url: `http://${AUTH_URL}:8001/health` },
+  { name: "Game Service", url: `http://${GAME_URL}:8002/health` },
+  { name: "Map/Image Service", url: `http://${IMAGE_URL}:8003/health` },
+  { name: "Score Service", url: `http://${SCORE_URL}:8004/health` },
+  { name: "Email Notification Service", url: `http://${NOTIFICATION_URL}:8005/health` },
+];
 
   let statuses = {};
 
@@ -20,7 +21,7 @@
       try {
         const res = await fetch(service.url);
         const data = await res.json();
-        results[service.name] = data.message;
+        results[service.name] = data.status === "ok" ? "Connected" : "Error";
       } catch (err) {
         results[service.name] = "Error connecting";
       }

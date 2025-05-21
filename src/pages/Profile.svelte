@@ -1,17 +1,17 @@
 <script>
     import { onMount } from "svelte";
+    import { AUTH_URL } from "../config";
     import { userStore } from "../stores/user";
 
     $: user = $userStore.user;
     $: isAuthenticated = $userStore.isAuthenticated;
-
 
     let profile = null;
     let errorMessage = "";
 
     async function fetchProfileStats() {
         try {
-            const response = await fetch(`http://localhost:8002/user/${user.name}/profile`, {
+            const response = await fetch(`http://${AUTH_URL}:8002/user/${$user.name}/profile`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
