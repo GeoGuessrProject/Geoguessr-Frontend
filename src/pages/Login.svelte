@@ -1,5 +1,4 @@
 <script>
-  import { user } from "../stores/user";
   import { AUTH_URL, GAME_URL, IMAGE_URL, SCORE_URL, NOTIFICATION_URL } from "../config";
   import { userStore } from "../stores/user";
 
