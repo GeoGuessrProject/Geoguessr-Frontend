@@ -9,10 +9,6 @@ export const GAME_URL = isDev
     ? "http://localhost:8002"
     : `http://${import.meta.env.VITE_GAME_PROD}:8002`;
 
-export const IMAGE_URL = isDev
-  ? "http://localhost:8003"
-  : "http://localhost:8003";
-
 export const SCORE_URL = isDev
   ? "http://localhost:8004"
   : "http://localhost:8004";

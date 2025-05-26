@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { AUTH_URL, GAME_URL, IMAGE_URL, SCORE_URL, NOTIFICATION_URL } from "../config";
+  import { AUTH_URL, GAME_URL, SCORE_URL, NOTIFICATION_URL } from "../config";
   import { userStore } from "../stores/user";
 
   $: user = $userStore.user;
@@ -8,7 +8,6 @@
 const services = [
   { name: "Auth Service", url: `${AUTH_URL}/health` },
   { name: "Game Service", url: `${GAME_URL}/health` },
-  { name: "Map/Image Service", url: `${IMAGE_URL}/health` },
   { name: "Score Service", url: `${SCORE_URL}/health` },
   { name: "Email Notification Service", url: `${NOTIFICATION_URL}/health` },
 ];
@@ -31,7 +30,6 @@ const services = [
 
   onMount(() => {
     checkServices();
-    console.log("AUTH URL", AUTH_URL);
   });
 </script>
 
