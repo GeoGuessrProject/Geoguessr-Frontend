@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { AUTH_URL } from "../config";
+    import { GAME_URL } from "../config";
     import { userStore } from "../stores/user";
 
     $: user = $userStore.user;
@@ -11,7 +11,7 @@
 
     async function fetchProfileStats() {
         try {
-            const response = await fetch(`${AUTH_URL}/user/${$user.name}/profile`, {
+            const response = await fetch(`${GAME_URL}/user/${user.name}/profile`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
